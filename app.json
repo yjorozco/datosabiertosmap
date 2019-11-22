@@ -27,14 +27,13 @@
       "supportsTablet": true
     },
     "android": {
-      "config":{
+      "config": {
         "googleMaps": {
-          "apiKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-        }  
+          "apiKey": "AIzaSyBfZVGMxPSeZOq314SRn6DoSbTZhXgUg6k"
+        }
       },
-      "package": "com.ve.mapsopendata2"
-    }
-
+      "package": "com.ve.mapsopendata"
+    },
+    "description": ""
   }
 }
-
