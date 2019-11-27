@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image, Picker, View, Button } from 'react-native';
-
+import { AsyncStorage } from 'react-native'
 
 export default class HomeScreen extends React.Component {
     constructor(props){
@@ -13,7 +13,11 @@ export default class HomeScreen extends React.Component {
     static navigationOptions = {
       title: 'CNTI - Proyecto de Datos Abiertos',
     };
+    async componentDidMount() {
+      await AsyncStorage.setItem('locations', JSON.stringify([]))
+    }
     render() {
+      
       const {navigate} = this.props.navigation;
       return (
         <View style={styles.container}>
