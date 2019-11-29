@@ -71,7 +71,7 @@ export default class MapaScreen extends React.Component {
       }
       data = await AsyncStorage.getItem('locations');
       data = await JSON.parse(data);
-      this.setState({
+      await this.setState({
         data
       });
 
@@ -86,8 +86,8 @@ export default class MapaScreen extends React.Component {
 
 
 
-  geoSuccess = (position) => {
-    this.setState({
+  geoSuccess = async (position) => {
+    await this.setState({
       ready: true,
       where: { lat: position.coords.latitude, lng: position.coords.longitude }
     })
@@ -95,9 +95,9 @@ export default class MapaScreen extends React.Component {
   geoFailure = (err) => {
     this.setState({ error: true });
   }
-  getMarkers = () => {
-    const data = this.state.data;
-    return data.map((record, index) => {
+  getMarkers = async (data) => {
+  
+    return await data.map((record, index) => {
       const lat = record.local_lat;
       const lon = record.local_lng;
       const title = record.local_nombre;
@@ -107,8 +107,9 @@ export default class MapaScreen extends React.Component {
   }
 
   render() {
+
     return (
-      (!this.state.error && this.state.where.lat && this.state.where.lng && (<View style={styles.container}>
+      (!this.state.error && this.state.data.length > 0 && this.state.where.lat && this.state.where.lng  (<View style={styles.container}>
         <MapView
           style={styles.map}
           initialRegion={{
@@ -123,7 +124,7 @@ export default class MapaScreen extends React.Component {
           <MapView.Marker pinColor={pinColor} title={"Tu ubicación"} key={"VEN"} coordinate={{ latitude: parseFloat(this.state.where.lat), longitude: parseFloat(this.state.where.lng) }} />
 
 
-          {this.getMarkers()}
+          {this.getMarkers(this.state.data)}
 
         </MapView>
 
